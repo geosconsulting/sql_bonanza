@@ -1,0 +1,12 @@
+psql -U postgres -c "CREATE DATABASE osm;"
+psql -U postgres -d osm -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
+
+psql -U postgres -d osm -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6.sql
+psql -U postgres -d osm -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6_action.sql
+psql -U postgres -d osm -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6_bbox.sql
+psql -U postgres -d osm -f /usr/share/doc/osmosis/examples/pgsnapshot_schema_0.6_linestring.sql
+
+osmosis --read-pbf italy-latest.osm.pbf --log-progress --write-pgsql database="osm" user="postgres" password="antarone"
+
+
+SELECT id,tstamp,tags->'name' AS "Hospital Name",ST_x(geom),ST_y(geom) FROM nodes WHERE tags->'amenity'='hospital' LIMIT 10;

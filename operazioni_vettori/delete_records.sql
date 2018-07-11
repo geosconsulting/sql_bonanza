@@ -1,0 +1,1 @@
+﻿DELETE FROM nuts WHERE nuts_id = 'DEC06';

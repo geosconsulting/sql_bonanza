@@ -1,0 +1,23 @@
+--Cambia Geometria
+ALTER TABLE effis.dummy_spatial ALTER COLUMN geom type geometry(MultiPolygon, 4326) using ST_Multi(geom);
+
+--Query Lunghe
+SELECT now() - query_start as "runtime", usename, datname, state, query
+  FROM  pg_stat_activity
+  WHERE now() - query_start > '2 minutes'::interval
+ ORDER BY runtime DESC;
+
+--Ammazza tutti
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'mydb';
+
+SELECT 
+    pg_terminate_backend(pid) 
+FROM 
+    pg_stat_activity 
+WHERE 
+    -- don't kill my own connection!
+    pid <> pg_backend_pid()
+    -- don't kill the connections to other databases
+    AND datname = 'database_name';

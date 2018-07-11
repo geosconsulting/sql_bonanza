@@ -1,0 +1,1 @@
+﻿SELECT datname,usename,pid,client_addr,query_start,query FROM pg_stat_activity;

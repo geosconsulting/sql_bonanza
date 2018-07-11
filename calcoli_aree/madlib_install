@@ -1,0 +1,6 @@
+create extension plpythonu;
+create extension plr;
+
+sudo /usr/local/madlib/bin/madpack -p postgres -c postgres@localhost:5432/postgres install
+
+

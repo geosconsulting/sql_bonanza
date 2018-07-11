@@ -1,0 +1,7 @@
+SELECT ST_VALUE(rast, 
+				ST_SetSRID(ST_Point(12.22312032567990592, 42.13582001305567104),4326)) 
+FROM rst.glc_1x1k
+WHERE rid IN (SELECT rid 
+			  FROM rst.glc_1x1k 
+              WHERE ST_Intersects(rast, 
+								  ST_SetSRID(ST_Point(12.22312032567990592, 42.13582001305567104), 4326)));;

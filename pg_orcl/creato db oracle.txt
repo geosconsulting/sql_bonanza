@@ -1,0 +1,21 @@
+creato db oracle
+
+connect system/password;
+	sqlplus sys as sysdba
+
+create user user1 identified by 'password';
+	create user fabio identified by 'antarone';
+
+
+grant dba,resource, connect to user;
+	grant dba,resource, connect to fabio;
+
+
+connect user1/password;
+	connect fabio/antarone;
+
+
+create table example(
+id int primary key,
+name varchar2(255)
+);

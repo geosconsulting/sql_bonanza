@@ -1,0 +1,12 @@
+﻿CREATE SERVER modis_viirs_server
+        FOREIGN DATA WRAPPER postgres_fdw
+        OPTIONS (host 'e1-dev-effisdb.ies.jrc.it', port '5432', dbname 'gwis');
+
+drop user mapping for postgres SERVER modis_viirs_server;
+
+CREATE USER MAPPING FOR postgres
+        SERVER modis_viirs_server
+        OPTIONS (user 'postgres', password 'test1018');
+
+IMPORT FOREIGN SCHEMA nasa_modis_ba
+    FROM SERVER modis_viirs_server INTO nasa_modis_ba_dev10;

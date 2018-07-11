@@ -1,0 +1,1 @@
+﻿ALTER TABLE effis.ba_2017 SET SCHEMA temp;

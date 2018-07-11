@@ -1,0 +1,1 @@
+SELECT id,tstamp,tags->'name' AS "Hospital Name",ST_x(geom),ST_y(geom) FROM nodes WHERE tags->'amenity'='hospital' LIMIT 10;

@@ -1,0 +1,1 @@
+﻿select nasa_modis_ba.stats_modis_ba_view(2002,'Northern America');

@@ -1,0 +1,1 @@
+﻿ALTER TABLE poly_stat OWNER TO jrc;

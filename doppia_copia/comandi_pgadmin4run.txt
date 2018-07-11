@@ -1,0 +1,5 @@
+systemctl list-units | grep postgresql
+
+7nLAbDc!2p
+
+/usr/local/lib/python2.7/dist-packages/pgadmin4/pgAdmin4.py 

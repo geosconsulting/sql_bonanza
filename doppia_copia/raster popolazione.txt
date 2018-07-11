@@ -1,0 +1,7 @@
+raster2pgsql -s 4326 -R -d -I -C -M -l 2,4,8,16,32 /media/sf_E_DRIVE/lanalfa/Documents/Downloads/__effis/effis_ubuntu/rasters/GHS/BLT/GHS_2014_Global.vrt -F -t 1000x1000 rst.blt_1x1k | psql -U postgres -d effis
+
+
+raster2pgsql -s 4326 -R -d -I -C -M -l 2,4,8,16,32 /media/sf_E_DRIVE/lanalfa/Documents/Downloads/__effis/effis_ubuntu/rasters/GHS/POP/GHS_POP_GPW42015_GLOBE_R2015A_54009_250_v1_0_4326.tif -F -t 1000x1000 rst.pop_1x1k | psql -U postgres -d effis
+
+
+SELECT id,tstamp,tags->'name' AS "Hospital Name",ST_x(geom),ST_y(geom) FROM nodes WHERE tags->'amenity'='hospital' LIMIT 10;

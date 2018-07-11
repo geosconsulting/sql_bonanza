@@ -1,0 +1,9 @@
+ogr2ogr -progress -append -lco "SCHEMA=effis" -lco "GEOMETRY_NAME=shape" -a_srs "EPSG:4326" 
+-f PostgreSQL "PG:dbname='test' host='localhost' port='5432' user='postgres' password='antarone'" 
+-nln "effis.current_burntareaspoly" ba_addition_1.shp
+
+--area 1
+SELECT * FROM mm.adm3_by_fireid_with_areas(50);
+
+--area 2
+SELECT * FROM mm.adm3_by_fireid_with_areas(201);

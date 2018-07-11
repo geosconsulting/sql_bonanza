@@ -1,0 +1,25 @@
+DROP SERVER IF EXISTS esposito_orcl CASCADE;
+
+CREATE SERVER esposito_orcl FOREIGN DATA WRAPPER oracle_fdw 
+	OPTIONS(dbserver '//esposito.ies.jrc.it/esposito')
+
+GRANT USAGE ON FOREIGN SERVER esposito_orcl TO e1gwis;
+
+CREATE USER MAPPING FOR e1gwis SERVER esposito_orcl 
+	OPTIONS (user 'effis', password 'FF19may');
+
+IMPORT FOREIGN SCHEMA "RDAPRD" 
+LIMIT TO(CURRENT_BURNTAREASPOLY,CURRENT_FIRESEVOLUTION,EMISSIONS,EMISSIONS_FIRES,FROM2000_BURNTAREAS,FROM2009_FIRESEVOLUTION)
+--LIMIT TO(CURRENT_FIRESEVOLUTION,FROM2009_FIRESEVOLUTION)
+FROM SERVER esposito_orcl 
+INTO rdaprd;
+
+SELECT srvoptions FROM pg_foreign_server WHERE srvname = 'esposito_orcl';
+
+SELECT oracle_diag();
+
+
+CREATE INDEX modis_2001_gix
+  ON modis_viirs.modis_2001
+  USING gist
+  (geom);
